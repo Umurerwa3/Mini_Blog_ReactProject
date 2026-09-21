@@ -110,3 +110,11 @@ Two conditional styling rules are implemented in `Post.tsx`:
 - **`React.memo`** — The `Post` component is wrapped in `memo()` before export (`src/components/Post/Post.tsx`). Since `PostList` maps over an array to render several `Post` cards, `memo` prevents a `Post` card from re-rendering when its own props haven't changed, even if a parent re-renders for an unrelated reason.
 - **Unique `key` prop** — `PostList` renders posts with `key={post.id}` (a stable, unique post ID) rather than the array index, so React can correctly track which DOM node maps to which post across re-renders/reorders.
 - **`withLogger` HOC** — `src/hoc/withLogger.tsx` is a generic higher-order component that wraps any component and logs `[withLogger] <ComponentName> mounted` / `unmounted` to the console via a `useEffect` with an empty dependency array and a cleanup function. It's applied to `Header` in `App.tsx` (`const HeaderWithLogger = withLogger(Header)`), demonstrating cross-cutting behavior (logging) added without modifying the wrapped component itself.
+
+## External Libraries / Packages Used
+
+- [`react`](https://react.dev/) / [`react-dom`](https://react.dev/) — core UI library
+- [`vite`](https://vitejs.dev/) + [`@vitejs/plugin-react`](https://github.com/vitejs/vite-plugin-react) — dev server and build tool
+- [`typescript`](https://www.typescriptlang.org/) — static typing
+
+No CSS-in-JS or UI component library was added; styling relies solely on plain CSS files and inline styles, as noted above. No additional runtime libraries (routing, state management, etc.) were introduced, since the assessment scope doesn't require them yet.

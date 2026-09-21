@@ -90,3 +90,17 @@ The `Post` component is implemented as a **functional component**, not a class c
 - Functional components compose more naturally with `React.memo` (used for optimization, see below) and with the `withLogger` higher-order component — both are simpler to apply to a function than to a class.
 
 All other components in this app (`Header`, `PostList`, `App`) are functional for the same reasons.
+
+## Styling
+
+Two styling approaches are used, on purpose, in different places:
+
+1. **External CSS files** — Every component (`Header`, `Post`, `PostList`, `App`) has its own co-located `.css` file imported directly into the component. This keeps styles scoped by naming convention (BEM-ish, e.g. `post__title`, `header__nav-link`) and keeps the component files focused on markup/logic rather than style declarations.
+2. **Inline styles** — Used for one-off, dynamic, per-instance styling that depends on runtime data rather than a fixed class. In `Post.tsx`, the `logoStyle`-equivalent pattern is used in `Header.tsx` for the logo's font weight, and — more importantly — `Post.tsx` applies an inline `style={{ borderLeftColor: '#f0a500' }}` conditionally, driven by whether the post's author matches the `highlightAuthor` prop.
+
+### Conditional styling
+
+Two conditional styling rules are implemented in `Post.tsx`:
+
+- **Author highlight** — Posts authored by "Aline Mukamana" (passed down from `PostList` as `highlightAuthor`) get the `post--highlighted` class (a soft background tint) *and* an inline `borderLeftColor`, demonstrating both styling methods reacting to the same condition.
+- **"New!" badge** — Posts with a `date` within the last 24 hours (checked against `Date.now()`) render a small green "New!" badge next to the title.

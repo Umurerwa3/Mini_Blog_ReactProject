@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import type { Post as PostType } from '../../types/Post'
 import './Post.css'
 
@@ -40,4 +41,6 @@ function Post({ post, highlightAuthor }: PostProps) {
   )
 }
 
-export default Post
+// Memoized so PostList re-renders don't force every Post card to re-render
+// when its own props (post, highlightAuthor) haven't changed.
+export default memo(Post)

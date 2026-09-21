@@ -1,0 +1,11 @@
+.post-list {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+}
+
+.post-list__heading {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #111827;
+}

@@ -12,7 +12,7 @@ function Header() {
       <span className="header__logo" style={logoStyle}>
         Dev<span className="header__logo-accent">Insights</span>
       </span>
-      <nav className="header__nav">
+      <nav className="header__nav" aria-label="Primary">
         <a href="#new-post" className="header__nav-link">
           New Post
         </a>

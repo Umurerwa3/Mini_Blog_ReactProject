@@ -50,3 +50,31 @@ There is no automated test suite in this assessment. To manually verify the app 
 3. Confirm three sample posts render under "Latest Posts", each with a title, author, content preview, and date.
 4. Confirm the post authored by "Aline Mukamana" is visually highlighted, and the most recent post shows a "New!" badge.
 5. Open the browser console and confirm `[withLogger] Header mounted` is logged on load.
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── Header/        # Site logo + nav link
+│   │   ├── Header.tsx
+│   │   └── Header.css
+│   ├── Post/           # Single blog post card (reusable)
+│   │   ├── Post.tsx
+│   │   └── Post.css
+│   └── PostList/        # Renders the list of Post cards
+│       ├── PostList.tsx
+│       └── PostList.css
+├── data/
+│   └── posts.ts        # Hardcoded sample post data
+├── hoc/
+│   └── withLogger.tsx  # Higher-order component for mount/unmount logging
+├── types/
+│   └── Post.ts          # Shared Post TypeScript interface
+├── App.tsx              # Root component: renders Header + PostList
+├── App.css
+├── main.tsx             # React entry point
+└── index.css            # Global styles
+```
+
+Each component lives in its own folder alongside its stylesheet, and shared types/data are pulled out of the components so they can be reused or swapped for a real API later without touching the UI layer.

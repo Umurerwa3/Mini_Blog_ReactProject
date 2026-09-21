@@ -118,3 +118,9 @@ Two conditional styling rules are implemented in `Post.tsx`:
 - [`typescript`](https://www.typescriptlang.org/) — static typing
 
 No CSS-in-JS or UI component library was added; styling relies solely on plain CSS files and inline styles, as noted above. No additional runtime libraries (routing, state management, etc.) were introduced, since the assessment scope doesn't require them yet.
+
+## Challenges & How They Were Overcome
+
+- **Scaffolding without a template repo.** The assessment asks not to start from a pre-built React template. Rather than relying on `npm create vite@latest`'s interactive scaffold output as-is, the Vite/TypeScript config files (`vite.config.ts`, `tsconfig.json`, `index.html`) were written by hand, which made it easier to understand exactly what each config option does instead of treating it as generated boilerplate.
+- **Typing inline styles correctly.** With React's automatic JSX runtime, the global `React` namespace isn't implicitly in scope, so typing an inline style object initially failed against `React.CSSProperties`. Fixing it meant explicitly importing `type { CSSProperties } from 'react'` instead of relying on the global namespace.
+- **Defining "within the last 24 hours" against hardcoded dates.** Since post dates are hardcoded strings rather than live timestamps, the "New!" badge logic compares `Date.now()` against `new Date(post.date).getTime()`. This means the badge is time-sensitive relative to whenever the app is actually run/graded, which is an inherent tradeoff of using static sample data instead of a real backend.

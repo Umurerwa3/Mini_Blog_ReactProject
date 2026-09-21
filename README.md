@@ -78,3 +78,15 @@ src/
 ```
 
 Each component lives in its own folder alongside its stylesheet, and shared types/data are pulled out of the components so they can be reused or swapped for a real API later without touching the UI layer.
+
+## Component Design Choices
+
+### Functional vs. Class Component (`Post`)
+
+The `Post` component is implemented as a **functional component**, not a class component. Reasoning:
+
+- `Post` is purely presentational — it takes a `post` object (and an optional `highlightAuthor` string) as props and renders them. It has no internal state and no lifecycle logic of its own, so a class component's `render()`, `this.props`, and constructor boilerplate would add ceremony without adding value.
+- Functional components are the current standard in React (the official docs, and every piece of module material from these first three weeks, present hooks-based functional components as the default). Writing a class component here would go against that convention for no functional benefit.
+- Functional components compose more naturally with `React.memo` (used for optimization, see below) and with the `withLogger` higher-order component — both are simpler to apply to a function than to a class.
+
+All other components in this app (`Header`, `PostList`, `App`) are functional for the same reasons.

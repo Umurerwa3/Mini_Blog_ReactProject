@@ -104,3 +104,9 @@ Two conditional styling rules are implemented in `Post.tsx`:
 
 - **Author highlight** — Posts authored by "Aline Mukamana" (passed down from `PostList` as `highlightAuthor`) get the `post--highlighted` class (a soft background tint) *and* an inline `borderLeftColor`, demonstrating both styling methods reacting to the same condition.
 - **"New!" badge** — Posts with a `date` within the last 24 hours (checked against `Date.now()`) render a small green "New!" badge next to the title.
+
+## Optimization & Higher-Order Components
+
+- **`React.memo`** — The `Post` component is wrapped in `memo()` before export (`src/components/Post/Post.tsx`). Since `PostList` maps over an array to render several `Post` cards, `memo` prevents a `Post` card from re-rendering when its own props haven't changed, even if a parent re-renders for an unrelated reason.
+- **Unique `key` prop** — `PostList` renders posts with `key={post.id}` (a stable, unique post ID) rather than the array index, so React can correctly track which DOM node maps to which post across re-renders/reorders.
+- **`withLogger` HOC** — `src/hoc/withLogger.tsx` is a generic higher-order component that wraps any component and logs `[withLogger] <ComponentName> mounted` / `unmounted` to the console via a `useEffect` with an empty dependency array and a cleanup function. It's applied to `Header` in `App.tsx` (`const HeaderWithLogger = withLogger(Header)`), demonstrating cross-cutting behavior (logging) added without modifying the wrapped component itself.
